@@ -3,19 +3,33 @@ import {Route} from 'react-router-dom'
 
 import About from './container/About'
 import Index from './container/Index'
+import User from './container/User';
 
 export default [
     {
         path: '/',
         component: Index,
-        exact: true,
-        key: 'index'
+        // exact: true,
+        key: 'index',
+        urls: [
+            {   
+                key: 'courseList',
+                url: 'course/list'
+            }
+        ]
     },
     {
         path: '/about',
         component: About,
         exact: true,
         key: 'about'
+    },
+    {
+        path: '/user',
+        component: User,
+        exact: true,
+        key: 'user',
+        url: 'user/userInfo'
     }
 ]
 // function App(props) {

@@ -13,7 +13,7 @@ function Index(props) {
     return (
         <div>
             <h1>123, {props.title} {count}</h1>
-                <button 
+            <button 
                 onClick={()=> {
                     setCount(count + 1);
                 }}
@@ -40,7 +40,7 @@ Index.loadData = (store) => {
 }
 
 export default connect(
-    state => {
+    (state) => {
         return {list: state.index.list}
     },
    {getIndexList} 

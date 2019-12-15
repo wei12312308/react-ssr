@@ -2,12 +2,12 @@ import {createStore, applyMiddleware, combineReducers} from 'redux';
 
 import thunk from 'redux-thunk'
 import IndexStore from './index'
+import UserStore from './user'
 
 const storeReducers = combineReducers({
-    index: IndexStore
+    index: IndexStore,
+    user: UserStore
 });
-
-// export default new createStore(storeReducers, applyMiddleware(thunk));
 
 export const getServerStore = () => {
     return new createStore(storeReducers, applyMiddleware(thunk));

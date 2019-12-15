@@ -2,9 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 export default () => {
-    return <ul>
-            <Link to="/">首页</Link>
-            <hr/>
-            <Link to="/about">关于</Link>
-        </ul>
+    return <div>
+        <Link to="/">首页</Link> | <Link to="/about">关于</Link> | <Link to="/user">用户信息</Link>
+    </div>
 }

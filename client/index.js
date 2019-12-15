@@ -8,13 +8,14 @@ import {Provider} from 'react-redux'
 import {getClientStore} from '../src/store/store'
 
 import Header from '../src/component/Header'
+
 let browserRouter = (
     <Provider store={getClientStore()}>
         <BrowserRouter>
             <Header></Header>
             {
                 routers.map(route => {
-                    <Route {...route}></Route>
+                    return <Route {...route}></Route>
                 })
             }
         </BrowserRouter>

@@ -2,29 +2,29 @@
 import request from '../utils/request'
 
 // type
-const GET_LIST = "INDEX/GET_LIST";
-const changeList = list => {
+const USER_INFO = "USER/USER_INFO";
+const changeUserInfo  = data => {
     return {
-        type: GET_LIST,
-        list
+        type: USER_INFO,
+        data
     }
 }
 
-export const getIndexList = serve => {
+export const getUserInfo = serve => {
     return (dispatch, getStete, axiosInstance) => {
         request({
-            url: 'course/list',
+            url: 'user/userInfo',
             method: 'GET',
         }).then(res => {
             if(res.data.success) {
-                dispatch(changeList(res.data.list))
+                dispatch(changeUserInfo(res.data.data))
             }
         }).catch(err => {
             console.log(err);
         })
-        // return axios.get('http://localhost:9001/api/course/list').then(res => {
+        // return axios.get('http://localhost:9001/api/user/userInfo').then(res => {
         //     if(res.data.success) {
-        //         dispatch(changeList(res.data.list))
+        //         dispatch(changeUserInfo(res.data.data))
         //     }
         // }).catch(err => {
         //     console.log(err);
@@ -33,16 +33,19 @@ export const getIndexList = serve => {
 }
 
 const defaultState = {
-    list: []
+    userInfo: {}
 }
 
 export default (state = defaultState, action) => {
     switch (action.type) {
-        case GET_LIST:
-            return {
+        case USER_INFO:
+            console.log('action', action);
+
+            const newState = {
                 ...state,
-                list: action.list
+                userInfo: action.data
             }
+            return newState
         default:
             return state;
     }

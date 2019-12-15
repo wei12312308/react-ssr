@@ -2,6 +2,18 @@ const express = require('express')
 
 const app = express();
 
+app.get('/api/user/userInfo', (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Method', 'GET,POST');
+    res.header('Content-Type', 'application/json;chatset=utf-8');
+    res.json({
+        success: true,
+        data: {
+            title: '开课吧'
+        }
+    })
+})
+
 app.get('/api/course/list', (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Method', 'GET,POST');

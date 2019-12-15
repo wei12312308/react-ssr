@@ -5,9 +5,11 @@ import routers from '../src/App'
 import {StaticRouter, matchPath, Route} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import {getServerStore} from '../src/store/store'
+import request from '../src/utils/request'
 
 import Header from '../src/component/Header'
 const store = getServerStore();
+
 const app = express()
 app.use(express.static('public'))
 
@@ -18,12 +20,22 @@ app.get('*', (req, res) => {
         if(match) {
             const {loadData} = route.component;
             if(loadData) {
-                promises.push(loadData(store))
+                // if(route.urls && route.urls.length) {
+                //     route.urls.forEach(item => {
+                //         promises.push(request({
+                //             url: item.url,
+                //             method: item.method
+                //         }))
+                //     })
+                // }
+                promises.push(loadData(store, route.url))
             }
         }
-        // return match;
     })
-    Promise.all(promises).then(() => {
+
+    Promise.all(promises).then((result) => {
+        // console.log(result);
+        // store.res = result;
         const content = renderToString(
             <Provider store={store}>
                 <StaticRouter location={req.url}>
@@ -36,6 +48,7 @@ app.get('*', (req, res) => {
                 </StaticRouter>
             </Provider>
         )
+        
         res.send(`
             <html>
                 <head>
@@ -44,13 +57,13 @@ app.get('*', (req, res) => {
                 </head>
                 <body>
                     <div id="root">${content}</div>
-                    <script>
-                        window.__context = ${JSON.stringify(store.getState())}
-                    </script>
+                    <script>window.__context = ${JSON.stringify(store.getState())}</script>
                     <script src="./bundle.js"></script>
                 </body>
             </html>
         `)
+    }).catch(err => {
+        console.log(err + ',------------------');
     })
     
 })
