@@ -10,6 +10,7 @@ const changeList = list => ({
 export const getIndexList = serve => {
     return (dispatch, getStete, axiosInstance) => {
         return axios.get('http://localhost:9001/api/course/list').then(res => {
+            // console.log(res);
             if(res.data.success) {
                 dispatch(changeList(res.data.list))
             }
@@ -26,8 +27,6 @@ const defaultState = {
 export default (state = defaultState, action) => {
     switch (action.type) {
         case GET_LIST:
-            console.log(action);
-            
             return {
                 ...state,
                 list: action.list
