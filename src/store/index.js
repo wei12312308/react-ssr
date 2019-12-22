@@ -11,8 +11,15 @@ const changeList = list => {
 }
 
 export const getIndexList = serve => {
-    return (dispatch, getStete, axiosInstance) => {
-        request({
+    return (dispatch, getStete, $axios) => {
+        $axios.get('/api/course/list').then(res => {
+            if(res.data.success) {
+                dispatch(changeList(res.data.list))
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+        /*request({
             url: 'course/list',
             method: 'GET',
         }).then(res => {
@@ -22,6 +29,8 @@ export const getIndexList = serve => {
         }).catch(err => {
             console.log(err);
         })
+*/
+
         // return axios.get('http://localhost:9001/api/course/list').then(res => {
         //     if(res.data.success) {
         //         dispatch(changeList(res.data.list))

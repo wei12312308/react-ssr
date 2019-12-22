@@ -4,19 +4,15 @@ import {Route} from 'react-router-dom'
 import About from './container/About'
 import Index from './container/Index'
 import User from './container/User';
+import './App.css'
+import NotFound from './container/NotFound';
 
 export default [
     {
         path: '/',
         component: Index,
-        // exact: true,
-        key: 'index',
-        urls: [
-            {   
-                key: 'courseList',
-                url: 'course/list'
-            }
-        ]
+        exact: true,
+        key: 'index'
     },
     {
         path: '/about',
@@ -29,7 +25,10 @@ export default [
         component: User,
         exact: true,
         key: 'user',
-        url: 'user/userInfo'
+    },
+    {
+        component: NotFound,
+        key: 'not-found',
     }
 ]
 // function App(props) {

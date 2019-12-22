@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
+import About from './About'
  
 import {getUserInfo} from '../store/user'
 
@@ -10,9 +12,11 @@ function User(props) {
             props.getUserInfo()
         }
     }, [])
-    return <span>
-        {props.userInfo.title}
-    </span>
+
+    return <Redirect to="/about"></Redirect>
+    // return <span>
+    //     {props.userInfo.title}
+    // </span>
 }
 
 User.loadData = (store) => {

@@ -11,17 +11,28 @@ const changeUserInfo  = data => {
 }
 
 export const getUserInfo = serve => {
-    return (dispatch, getStete, axiosInstance) => {
-        request({
-            url: 'user/userInfo',
-            method: 'GET',
-        }).then(res => {
+    return (dispatch, getStete, $axios) => {
+        console.dir($axios);
+        $axios.get('/api/user/userInfo').then(res => {
             if(res.data.success) {
                 dispatch(changeUserInfo(res.data.data))
             }
         }).catch(err => {
             console.log(err);
         })
+        
+        // request({
+        //     url: 'user/userInfo',
+        //     method: 'GET',
+        // }).then(res => {
+        //     if(res.data.success) {
+        //         dispatch(changeUserInfo(res.data.data))
+        //     }
+        // }).catch(err => {
+        //     console.log(err);
+        // })
+
+        
         // return axios.get('http://localhost:9001/api/user/userInfo').then(res => {
         //     if(res.data.success) {
         //         dispatch(changeUserInfo(res.data.data))
